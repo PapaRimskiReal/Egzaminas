@@ -57,6 +57,33 @@ public class AdminController {
 		entryRepository.deleteById(entryId);
 		return "redirect:/blog/admin";
 	}
+	
+	@RequestMapping("/editEntry")
+	public String editEntry(@RequestParam("id") int entryId, Model model, @ModelAttribute("newEntry") Entry newEntry) {
+
+		Entry entry = entryRepository.findById(entryId).get();
+		model.addAttribute("Oldentry", entry);
+				
+		return "editEntry";
+	}
+	
+	@RequestMapping(value = "/editEntry", method = RequestMethod.POST)
+	public String editEntryPost(@RequestParam("id") int entryId, Model model, @ModelAttribute("newEntry") Entry newEntry) {
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
+		
+//		newEntry.setId(entryId);
+//		newEntry.setAuthor(username);
+		Entry entry = entryRepository.findById(entryId).get();
+		entry.setText(newEntry.getText());
+		entry.setTitle(newEntry.getTitle());
+		
+		
+		entryRepository.save(entry);
+		
+		return "redirect:/blog/admin";
+	}
 
 	@RequestMapping("/showEntry")
 	public String showEntry(@RequestParam("id") int entryId, Model model,

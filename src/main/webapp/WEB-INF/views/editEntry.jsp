@@ -25,35 +25,37 @@
 			<li class="nav-item mr-3 btn"><a href="/blog/registration">Registration</a></li>
 
 			<li class="nav-item mr-3 btn"><a href="<c:url value="/logout"/>">Logout</a></li>
+
 		</ul>
+
 	</nav>
 
-	<div class="container d-flex flex-column">
-		<div class="jumbotron">
-			<h1 class="display-4 tb">${showEntry.title}</h1>
 
-			<hr class="my-4">
-			<p class="tb">${showEntry.text}</p>
-		</div>
+	<div class="mt-5">
+		<form:form method="POST" modelAttribute="Oldentry">
+			<div class="container d-flex flex-column">
+				<div>
+					<label>Title</label>
+				</div>
+				<div>
+					<%-- <form:input path="title" type="text" value="${Oldentry.title}"/> --%>
+					<form:input path="title" type="text"/>
+				</div>
+				<div>
 
+					<label>Text</label>
+				</div>
+				<div>
+					<form:textarea rows="10" cols="100" path="text" type="text"/>
+			
+				</div>
+				<div>
+					<input class="btn" type="submit" value="Done" />
+				</div>
+			</div>
+		</form:form>
 	</div>
-	<c:forEach items="${EntryPropertiesList}" var="EntryPropertiesList">
-		<fieldset class="comment">
-			<legend class="ml-3">${EntryPropertiesList.userName}</legend>
-			<p class="ml-5">${EntryPropertiesList.comment}</p>
-		</fieldset>
-		<c:if test="${EntryPropertiesList.answer == null}">
-			<a
-				href=" <spring:url value="/blog/admin/reply?id=${EntryPropertiesList.id}" /> "><button
-					class="btn m-0 p-0 ml-3">Reply</button></a>
-		</c:if>
-		<c:if test="${EntryPropertiesList.answer != null}">
-			<fieldset class="answer ml-5">
-				<legend class="ml-3">${EntryPropertiesList.entry.author}</legend>
-				<p class="ml-5">${EntryPropertiesList.answer}</p>
-			</fieldset>
-		</c:if>
-	</c:forEach>
+
 
 
 </body>

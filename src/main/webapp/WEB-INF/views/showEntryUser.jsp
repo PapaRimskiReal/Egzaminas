@@ -21,8 +21,8 @@
 	<nav class="navbar navbar-expand fixed-top justify-content-between">
 
 		<ul class="navbar-nav mr-auto d-flex flex-row ">
-			<li class="nav-item mr-3 btn"><a href="blog/admin">Admin</a></li>
-			<li class="nav-item mr-3 btn"><a href="blog/registration">Registration</a></li>
+			<li class="nav-item mr-3 btn"><a href="/blog/admin">Admin</a></li>
+			<li class="nav-item mr-3 btn"><a href="/blog/registration">Registration</a></li>
 
 			<li class="nav-item mr-3 btn"><a href="<c:url value="/logout"/>">Logout</a></li>
 		</ul>

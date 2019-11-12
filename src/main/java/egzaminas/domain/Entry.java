@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,6 +21,7 @@ public class Entry {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	private String title;
+	@Column(length = 2000)
 	private String text;
 	private String author;
 
@@ -97,6 +99,13 @@ public class Entry {
 	 */
 	public int getId() {
 		return id;
+	}
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	
