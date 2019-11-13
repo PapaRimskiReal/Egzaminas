@@ -39,6 +39,7 @@
 	<fieldset class="comment">
 		<legend class="ml-3">${EntryPropertiesList.userName}</legend>
 		<p class="ml-5">${EntryPropertiesList.comment}</p>
+		<p class="ml-5 rt">Vote: ${EntryPropertiesList.vote}</p>
 	</fieldset>
 	<c:if test="${EntryPropertiesList.answer != null}">
 		<fieldset class="answer ml-5">
@@ -51,6 +52,12 @@
 	</div>
 	<div class="container d-flex flex-column mt-3">
 		<form:form method="POST" modelAttribute="newEntryProperties">
+		<label>Vote:</label>
+		<form:radiobutton path="vote" value="1"/>1
+		<form:radiobutton path="vote" value="2"/>2
+		<form:radiobutton path="vote" value="3"/>3
+		<form:radiobutton path="vote" value="4"/>4
+		<form:radiobutton path="vote" value="5"/>5
 		<form:textarea rows="5" cols="50" path="comment" />
 		<input class="btn" type="submit" value="Comment" />
 		</form:form>

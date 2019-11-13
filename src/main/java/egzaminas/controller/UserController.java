@@ -31,6 +31,11 @@ public class UserController {
 	@Autowired
 	EntryPropertiesRepository entryPropertiesRepository;
 
+	
+	/**
+	 * Show clicked blog
+	 * only for user, or admin as user
+	 */
 	@RequestMapping("/showEntry")
 	public String showEntry(@RequestParam("id") int entryId, Model model,
 			@ModelAttribute("newEntryProperties") EntryProperties newEntryProperties) {
@@ -43,6 +48,14 @@ public class UserController {
 		return "showEntryUser";
 	}
 
+	/**
+	 * adds user's comment for blog
+	 * @param newEntryProperties
+	 * @param model
+	 * @param showEntry
+	 * @param entryId
+	 * @return
+	 */
 	@RequestMapping(value = "/showEntry", method = RequestMethod.POST)
 	public String newEntryProperties(@ModelAttribute("newEntryProperties") EntryProperties newEntryProperties,
 			Model model, @ModelAttribute("showEntry") Entry showEntry,

@@ -17,6 +17,7 @@ public class EntryProperties {
 	private int id;
 	private String comment;
 	private String answer;
+	private int vote;
 	private String userName;
 	
 	@ManyToOne
@@ -89,6 +90,14 @@ public class EntryProperties {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public int getVote() {
+		return vote;
+	}
+
+	public void setVote(int vote) {
+		this.vote = vote;
 	}
 
 	

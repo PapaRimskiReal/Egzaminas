@@ -41,6 +41,7 @@
 		<fieldset class="comment">
 			<legend class="ml-3">${EntryPropertiesList.userName}</legend>
 			<p class="ml-5">${EntryPropertiesList.comment}</p>
+			<p class="ml-5 rt">Vote: ${EntryPropertiesList.vote}</p>
 		</fieldset>
 		<c:if test="${EntryPropertiesList.answer == null}">
 			<a

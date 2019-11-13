@@ -22,6 +22,9 @@ public class HomePageController {
 	@Autowired
 	EntryRepository entryRepository;
 
+	/**
+	 * Home page mapping
+	 */
 	@GetMapping
 	public String pradzia(Model model) {
 
