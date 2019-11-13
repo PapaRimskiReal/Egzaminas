@@ -2,6 +2,8 @@ package egzaminas.controller;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,6 +23,8 @@ import egzaminas.repository.EntryRepository;
 @Controller
 @RequestMapping("blog/admin")
 public class AdminController {
+	
+	Logger LOG = LogManager.getLogger(AdminController.class);
 
 	@Autowired
 	EntryRepository entryRepository;
@@ -32,9 +36,8 @@ public class AdminController {
 	public String admin(@ModelAttribute("newEntry") Entry newEntry, Model model) {
 
 		List<Entry> entryList = entryRepository.findAll();
-
 		model.addAttribute("entryList", entryList);
-
+		
 		return "admin";
 	}
 
@@ -45,8 +48,9 @@ public class AdminController {
 		String username = authentication.getName();
 
 		newEntry.setAuthor(username);
-
 		entryRepository.save(newEntry);
+		
+		LOG.info("Sukurtas naujas blogas, pavadinimu: " + newEntry.getTitle());
 
 		return "redirect:/blog/admin";
 	}
@@ -55,6 +59,9 @@ public class AdminController {
 	public String deleteEntry(@RequestParam("id") int entryId) {
 
 		entryRepository.deleteById(entryId);
+		
+		LOG.info("Istrintas blogas, pavadinimu: [" + entryRepository.findById(entryId).get().getTitle() + "]");
+		
 		return "redirect:/blog/admin";
 	}
 	
@@ -70,15 +77,9 @@ public class AdminController {
 	@RequestMapping(value = "/editEntry", method = RequestMethod.POST)
 	public String editEntryPost(@RequestParam("id") int entryId, Model model, @ModelAttribute("newEntry") Entry newEntry) {
 
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String username = authentication.getName();
-		
-//		newEntry.setId(entryId);
-//		newEntry.setAuthor(username);
 		Entry entry = entryRepository.findById(entryId).get();
 		entry.setText(newEntry.getText());
 		entry.setTitle(newEntry.getTitle());
-		
 		
 		entryRepository.save(entry);
 		
@@ -116,7 +117,9 @@ public class AdminController {
 		
 		entryPropertiesRepository.save(oldEntryProperties);
 		
-		return "addComment";
+		LOG.info("atsakyta i komentara: [" + oldEntryProperties.getComment() +  "] bloge: [" + oldEntryProperties.getEntry().getTitle() + "]");
+		
+		return "redirect:/blog/admin/showEntry?id="+oldEntryProperties.getEntry().getId();
 	}
 	
 }

@@ -58,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.logout().logoutSuccessUrl("/blog");
 		http.exceptionHandling().accessDeniedPage("/login?accessDenied");
 		http.authorizeRequests().antMatchers("/").permitAll().antMatchers("/**/admin").hasRole("ADMIN")
-				.antMatchers("/**/user/**").hasAnyRole("USER").and().formLogin();
+				.antMatchers("/**/user/**").hasAnyRole("USER","ADMIN").and().formLogin();
 
 	}
 }
